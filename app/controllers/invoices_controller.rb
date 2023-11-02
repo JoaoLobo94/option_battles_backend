@@ -14,6 +14,10 @@ class InvoicesController < ApplicationController
     @invoice = Invoice.find(params[:id])
     @status = Lightning.new.get_invoice_status(@invoice.invoice_code)["settled"]
     @invoice.update(paid:  @status == 1)
+
+    if @invoice.paid
+      Bet.create(user_id: @invoice.user_id, amount: @invoice.amount)
+    end
     render json: @invoice, status: 200
   end
 

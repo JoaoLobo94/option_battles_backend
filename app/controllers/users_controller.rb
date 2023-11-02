@@ -23,6 +23,7 @@ class UsersController < ApplicationController
 
     if game_to_join.users.count == 2
       game_to_join.update(in_progress: true)
+      Bet.find_by(user_id: @user.id, game_id: game_to_join.id).update(bet: user_params[:bet])
       render json: 'Let the battle start', status: 200
     else
       render json: 'Waiting for another player', status: 200
@@ -35,6 +36,6 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.permit(:game_id, :lnurl, :npub)
+    params.permit(:game_id, :lnurl, :npub, :bet)
   end
 end

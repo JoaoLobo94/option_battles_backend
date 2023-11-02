@@ -10,7 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_01_222456) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_02_133028) do
+  create_table "bets", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.float "amount"
+    t.string "bet", null: false
+    t.bigint "user_id"
+    t.bigint "game_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["game_id"], name: "index_bets_on_game_id"
+    t.index ["user_id"], name: "index_bets_on_user_id"
+    t.check_constraint "`bet` in (_utf8mb4'up',_utf8mb4'down')"
+  end
+
   create_table "games", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.float "amount", null: false
     t.boolean "in_progress", default: false
@@ -38,6 +50,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_01_222456) do
     t.index ["game_id"], name: "index_users_on_game_id"
   end
 
+  add_foreign_key "bets", "games"
+  add_foreign_key "bets", "users"
   add_foreign_key "invoices", "users"
   add_foreign_key "users", "games"
 end
