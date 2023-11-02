@@ -13,6 +13,7 @@
 ActiveRecord::Schema[7.1].define(version: 2023_11_01_222456) do
   create_table "games", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.float "amount", null: false
+    t.boolean "in_progress", default: false
     t.string "winner"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -31,8 +32,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_01_222456) do
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "npub", null: false
     t.string "lnurl"
-    t.float "game_amount"
-    t.boolean "looking_for_game", default: true
     t.bigint "game_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

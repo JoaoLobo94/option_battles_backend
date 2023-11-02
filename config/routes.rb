@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :games, only: [:index] do
+  resources :games, only: [:index, :update] do
     get :index_game_users, to: 'games#index_game_users'
   end
   resources :users, param: :npub, only: [:create, :update, :show]

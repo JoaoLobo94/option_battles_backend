@@ -6,16 +6,6 @@ class GamesController < ApplicationController
     render json: @games, status: 200
   end
 
-  def create
-    @game = Game.new(game_params)
-    @user = User.find_by(npub: game_params[:npub])
-    if @game.save
-      @user.update(game_id: @game.id, looking_for_game: false)
-    end
-
-    render json: @game, status: 201
-  end
-
   def update
     @game.update(game_params[:winner])
 

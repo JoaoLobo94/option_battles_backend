@@ -12,15 +12,21 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user.update(game_id: user_params[:game_id], lnurl: user_params[:lnurl], game_amount: user_params[:game_amount],
-                 looking_for_game: user_params[:looking_for_game])
+    @user.update(game_id: user_params[:game_id], lnurl: user_params[:lnurl])
     render json: @user, status: 200
   end
 
   def add_user_to_game
-    User.looking_for_same_game(user_params[:game_amount]).sample.update(game_id: user_params[:game_id], looking_for_game: false)
+    games = Game.find_or_create_by(amount: user_params[:game_amount], in_progress: false)
+    game_to_join = games.sample
+    @user.update(game_id: game_to_join.id)
 
-    render json: @user, status: 200
+    if game_to_join.users.count == 2
+      game_to_join.update(in_progress: true)
+      render json: 'Let the battle start', status: 200
+    else
+      render json: 'Waiting for another player', status: 200
+    end
   end
 
   private
@@ -29,6 +35,6 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.permit(:game_id, :lnurl, :npub, :game_amount, :looking_for_game)
+    params.permit(:game_id, :lnurl, :npub)
   end
 end

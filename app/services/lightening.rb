@@ -6,7 +6,6 @@ class Lightning
     @wallet_key = ENV['WALLET_KEY']
   end
 
-
   def retrieve_wallet(wallet_id)
     self.class.get("/wallet/#{wallet_id}", headers: { "X-Api-Key" => @secret_key })
   end
@@ -17,6 +16,11 @@ class Lightning
 
   def pay_invoice(invoice)
     self.class.post("/wallet/#{@wallet_key}/withdraw", body: { out: 'lnurl', bolt11: invoice }, headers: { "X-Api-Key" => @secret_key })
+  end
+
+  def transfer_funds(amount, lnurlpay_encoded)
+    self.class.post("/wallet/#{@wallet_key}/lnurlp/pay", body: { amt_msat: amount, ln_url: lnurlpay_encoded  }, headers: { "X-Api-Key" => @secret_key })
+
   end
 
   def get_invoice_status(invoice)

@@ -18,7 +18,7 @@ class InvoicesController < ApplicationController
   end
 
   def pay_invoice
-    render json: Invoice.pay_winner(invoice_params[:invoice_to_pay]), status: 200
+    render json: Invoice.pay_winner, status: 200
   end
 
   private
