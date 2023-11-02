@@ -8,6 +8,7 @@ class GamesController < ApplicationController
 
   def update
     @game.update(game_params[:winner])
+    @game.users.map{|user| user.update(game_id: nil)}
 
     render json: @game, status: 200
   end
