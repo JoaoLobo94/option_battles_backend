@@ -36,6 +36,6 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.permit(:game_id, :lnurl, :npub, :bet)
+    params.permit(:game_id, :lnurl, :npub, :bet, :username)
   end
 end

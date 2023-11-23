@@ -13,4 +13,5 @@ class User < ApplicationRecord
   belongs_to :game, optional: true
   has_many :invoices
   has_many :bets
+  validates :name, presence: true, uniqueness: true
 end
