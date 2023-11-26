@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get :login , to: 'auth#login'
   resources :games, only: [:index, :update] do
     get :index_game_users, to: 'games#index_game_users'
   end
