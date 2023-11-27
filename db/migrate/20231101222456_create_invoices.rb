@@ -1,9 +1,9 @@
 class CreateInvoices < ActiveRecord::Migration[7.1]
   def change
     create_table :invoices do |t|
-      t.float :amount
+      t.decimal :amount, precision: 10, scale: 2
       t.boolean :paid, default: false
-      t.string :invoice_code
+      t.text :invoice_code
       t.references :user, foreign_key: true, index: true
 
       t.timestamps

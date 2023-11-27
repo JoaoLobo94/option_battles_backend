@@ -13,7 +13,7 @@ class UsersController < ApplicationController
     render json: {
       user: @user,
       token: @token
-    }, status: :created
+    }, status: :accepted
     else
       render json: { message: @user.errors.full_messages }, status: :not_acceptable
     end

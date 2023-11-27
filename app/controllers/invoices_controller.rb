@@ -5,9 +5,9 @@ class InvoicesController < ApplicationController
 
   def create
     @invoice_code = Lightning.new.create_invoice(invoice_params[:amount], "Pay #{invoice_params[:amount]} to play")
-    @invoice = Invoice.new(user_id: invoice_params[:user_id], amount: invoice_params[:amount], invoice_code: @invoice_code)
+    @invoice = Invoice.new(user_id: current_user.id, amount: invoice_params[:amount], invoice_code: @invoice_code)
     @invoice.save
-    render json: @invoice, status: 201
+    render json: {payment_hash: JSON.parse(@invoice.invoice_code)['payment_request']}, status: 201
   end
 
   def update
@@ -28,6 +28,6 @@ class InvoicesController < ApplicationController
   private
 
   def invoice_params
-    params.permit(:user_id, :amount, :paid, :invoice_to_pay)
+    params.permit(:user_id, :amount, :paid)
   end
 end

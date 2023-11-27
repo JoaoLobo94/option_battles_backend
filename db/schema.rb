@@ -32,9 +32,9 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_02_133028) do
   end
 
   create_table "invoices", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.float "amount"
+    t.decimal "amount", precision: 10, scale: 2
     t.boolean "paid", default: false
-    t.string "invoice_code"
+    t.text "invoice_code"
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

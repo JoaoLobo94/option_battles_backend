@@ -25,6 +25,6 @@ class GamesController < ApplicationController
   end
 
   def game_params
-    params.permit(:amount, :winner, :npub)
+    params.permit(:amount, :winner)
   end
 end
