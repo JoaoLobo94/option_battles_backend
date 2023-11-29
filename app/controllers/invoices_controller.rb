@@ -24,6 +24,13 @@ class InvoicesController < ApplicationController
   def pay_invoice
     render json: Invoice.pay_winner, status: 200
   end
+  def check_invoice_status
+    # implement
+    # @invoice = Invoice.find(params[:id])
+    # @status = Lightning.new.get_invoice_status(@invoice.invoice_code)["settled"]
+    # @invoice.update(paid:  @status == 1)
+    # render json: @invoice, status: 200
+  end
 
   private
 
