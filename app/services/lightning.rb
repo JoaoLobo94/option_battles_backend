@@ -16,4 +16,8 @@ class Lightning
   def get_invoice_status(payment_hash)
     self.class.get("/invoices/#{payment_hash}", headers: { "Authorization" => "Bearer #{@secret_key}", "Content-Type" => "application/json" })
   end
+
+  def decode_invoice(invoice)
+    self.class.get("decode/bolt11/#{invoice}",  headers: { "Authorization" => "Bearer #{@secret_key}", "Content-Type" => "application/json" })
+  end
 end

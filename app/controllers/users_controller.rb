@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   skip_before_action :authorized, only: [:create]
-  before_action :set_user, only: [:show, :update]
+  before_action :set_user, only: [:show, :update, :get_balance, :withdraw]
 
   def show
     render json: @user, status: 200
@@ -24,12 +24,25 @@ class UsersController < ApplicationController
     render json: @user, status: 200
   end
 
+  def get_balance
+    @user = User.find_by(username: user_params[:username])
+    render json: @user.balance, status: 200
+  end
+
+  def withdraw
+    if @user.withdraw(user_params[:bolt11]) == "Insufficient funds"
+      render json: { message: "Insufficient funds" }, status: 400
+    else
+      render json: @user, status: 200
+    end
+  end
+
   private
   def set_user
     @user = User.find_by(username: user_params[:username])
   end
 
   def user_params
-    params.permit(:game_id, :lnurl, :username, :password)
+    params.permit(:game_id, :lnurl, :username, :password, :bolt11)
   end
 end

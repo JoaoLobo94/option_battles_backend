@@ -17,19 +17,8 @@ class BetsController < ApplicationController
     render json: @bet, status: 200
   end
 
-  def pay_invoice
-    @bet = Bet.find(id: bet_params[:id])
-    if @bet.winner
-      Lightning.pay_invoice(bet_params[:bolt11])
-      @bet.user.update(balance: @bet.user.balance - @bet.amount * 2)
-      render json: @bet, status: 200
-    else
-      render json: @bet, status: 402
-    end
-  end
-
   private
   def bet_params
-    params.permit(:username, :amount, :bet_type, :win_price, :id, :bolt11)
+    params.permit(:username, :amount, :bet_type, :win_price, :id)
   end
 end
