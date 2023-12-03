@@ -2,12 +2,15 @@
 #
 # Table name: bets
 #
-#  id         :bigint           not null, primary key
-#  amount     :float(24)
-#  bet        :string(255)      not null
-#  user_id    :bigint
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id          :bigint           not null, primary key
+#  amount      :float(24)
+#  bet_type    :string(255)      not null
+#  winner      :boolean          default(FALSE)
+#  win_price   :decimal(10, )
+#  start_price :decimal(10, )
+#  user_id     :bigint
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
 #
 class Bet < ApplicationRecord
   belongs_to :user

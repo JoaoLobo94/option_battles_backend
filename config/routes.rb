@@ -3,5 +3,6 @@ Rails.application.routes.draw do
   resources :users, only: [:create, :update, :show]
   resources :invoices, only: [:create, :show, :update]
   resources :bets, only: [:create, :show, :update]
+  get :start_game, to: 'bets#start_game'
   get :pay_invoice, to: 'bets#pay_invoice'
 end

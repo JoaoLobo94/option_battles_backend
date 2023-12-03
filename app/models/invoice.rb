@@ -3,9 +3,9 @@
 # Table name: invoices
 #
 #  id           :bigint           not null, primary key
-#  amount       :float(24)
+#  amount       :decimal(10, 2)
 #  paid         :boolean          default(FALSE)
-#  invoice_code :string(255)
+#  invoice_code :text(65535)
 #  user_id      :bigint
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null

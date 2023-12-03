@@ -2,12 +2,13 @@
 #
 # Table name: users
 #
-#  id         :bigint           not null, primary key
-#  npub       :string(255)      not null
-#  lnurl      :string(255)
-#  game_id    :bigint
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id              :bigint           not null, primary key
+#  username        :string(255)      not null
+#  password_digest :string(255)      not null
+#  balance         :decimal(10, 2)
+#  lnurl           :string(255)
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
 #
 class User < ApplicationRecord
   has_many :invoices
