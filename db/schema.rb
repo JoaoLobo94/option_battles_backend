@@ -13,22 +13,14 @@
 ActiveRecord::Schema[7.1].define(version: 2023_11_02_133028) do
   create_table "bets", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.float "amount"
-    t.string "bet", null: false
+    t.string "bet_type", null: false
+    t.boolean "winner", default: false
+    t.decimal "win_price", precision: 10
+    t.decimal "start_price", precision: 10
     t.bigint "user_id"
-    t.bigint "game_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["game_id"], name: "index_bets_on_game_id"
     t.index ["user_id"], name: "index_bets_on_user_id"
-    t.check_constraint "`bet` in (_utf8mb4'up',_utf8mb4'down')"
-  end
-
-  create_table "games", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.float "amount", null: false
-    t.boolean "in_progress", default: false
-    t.string "winner"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "invoices", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -42,18 +34,14 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_02_133028) do
   end
 
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "npub"
     t.string "username", null: false
     t.string "password_digest", null: false
+    t.decimal "balance", precision: 10, scale: 2
     t.string "lnurl"
-    t.bigint "game_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["game_id"], name: "index_users_on_game_id"
   end
 
-  add_foreign_key "bets", "games"
   add_foreign_key "bets", "users"
   add_foreign_key "invoices", "users"
-  add_foreign_key "users", "games"
 end

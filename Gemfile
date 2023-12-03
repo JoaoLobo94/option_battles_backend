@@ -14,6 +14,7 @@ gem 'rack-cors'
 gem 'jwt'
 gem 'bcrypt'
 gem 'dotenv-rails'
+gem 'websocket-eventmachine-client'
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 # gem "jbuilder"
 

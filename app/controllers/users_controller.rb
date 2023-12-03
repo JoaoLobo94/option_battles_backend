@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   skip_before_action :authorized, only: [:create]
-  before_action :set_user, only: [:show, :update, :add_user_to_game]
+  before_action :set_user, only: [:show, :update]
 
   def show
     render json: @user, status: 200
@@ -24,26 +24,12 @@ class UsersController < ApplicationController
     render json: @user, status: 200
   end
 
-  def add_user_to_game
-    games = Game.find_or_create_by(amount: user_params[:game_amount], in_progress: false)
-    game_to_join = games.sample
-    @user.update(game_id: game_to_join.id)
-
-    if game_to_join.users.count == 2
-      game_to_join.update(in_progress: true)
-      Bet.find_by(user_id: @user.id, game_id: game_to_join.id).update(bet: user_params[:bet])
-      render json: 'Let the battle start', status: 200
-    else
-      render json: 'Waiting for another player', status: 200
-    end
-  end
-
   private
   def set_user
     @user = User.find_by(username: user_params[:username])
   end
 
   def user_params
-    params.permit(:game_id, :lnurl, :npub, :bet, :username, :password)
+    params.permit(:game_id, :lnurl, :username, :password)
   end
 end

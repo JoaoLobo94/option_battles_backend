@@ -10,7 +10,6 @@
 #  updated_at :datetime         not null
 #
 class User < ApplicationRecord
-  belongs_to :game, optional: true
   has_many :invoices
   has_many :bets
   has_secure_password

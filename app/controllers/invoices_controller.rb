@@ -21,13 +21,9 @@ class InvoicesController < ApplicationController
     end
 
     if @invoice.paid
-      Bet.create(user_id: @invoice.user_id, amount: @invoice.amount, bet: invoice_params[:direction])
+      @invoice.user.update(balance: @invoice.user.balance + @invoice.amount)
       render json: @invoice, status: 200
     end
-  end
-
-  def pay_invoice
-    render json: Invoice.pay_winner, status: 200
   end
 
   private
