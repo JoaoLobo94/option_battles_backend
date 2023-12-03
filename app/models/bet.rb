@@ -6,7 +6,6 @@
 #  amount      :float(24)
 #  bet_type    :string(255)      not null
 #  winner      :boolean          default(FALSE)
-#  win_price   :decimal(10, )
 #  start_price :decimal(10, )
 #  user_id     :bigint
 #  created_at  :datetime         not null
@@ -42,7 +41,7 @@ class Bet < ApplicationRecord
     data = JSON.parse(msg)
     price = data['p'].to_f
 
-    if (bet_type == 'up' && price > start_price) || (bet_type == 'down' && price < start_price)
+    if (bet_type == 'up' && price > start_price + 5) || (bet_type == 'down' && price < start_price - 5)
       update(winner: true)
       user.update(balance: user.balance + amount * 2)
     else

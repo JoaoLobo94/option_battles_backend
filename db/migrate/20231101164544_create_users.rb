@@ -3,7 +3,7 @@ class CreateUsers < ActiveRecord::Migration[7.1]
     create_table :users do |t|
       t.string :username, null: false
       t.string :password_digest, null: false
-      t.decimal :balance, precision: 10, scale: 2
+      t.decimal :balance, precision: 10, scale: 2, default: 0
       t.string :lnurl
 
       t.timestamps

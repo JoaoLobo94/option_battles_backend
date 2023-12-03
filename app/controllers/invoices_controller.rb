@@ -29,6 +29,6 @@ class InvoicesController < ApplicationController
   private
 
   def invoice_params
-    params.permit(:id, :user_id, :amount, :paid, :payment_hash, :direction)
+    params.permit(:id, :user_id, :amount, :paid, :payment_hash)
   end
 end

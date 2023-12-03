@@ -15,7 +15,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_02_133028) do
     t.float "amount"
     t.string "bet_type", null: false
     t.boolean "winner", default: false
-    t.decimal "win_price", precision: 10
     t.decimal "start_price", precision: 10
     t.bigint "user_id"
     t.datetime "created_at", null: false
@@ -36,7 +35,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_02_133028) do
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "username", null: false
     t.string "password_digest", null: false
-    t.decimal "balance", precision: 10, scale: 2
+    t.decimal "balance", precision: 10, scale: 2, default: "0.0"
     t.string "lnurl"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

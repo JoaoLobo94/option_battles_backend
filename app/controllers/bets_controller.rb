@@ -7,7 +7,7 @@ class BetsController < ApplicationController
     @bet = Bet.create(amount: bet_params[:amount],
                       bet_type: bet_params[:bet_type],
                       user_id: User.find_by(username: bet_params[:username]),
-                      win_price: bet_params[:win_price])
+                      start_price: bet_params[:start_price])
     render json: @bet, status: 201
   end
   def update
@@ -19,6 +19,6 @@ class BetsController < ApplicationController
 
   private
   def bet_params
-    params.permit(:username, :amount, :bet_type, :win_price, :id)
+    params.permit(:username, :amount, :bet_type, :start_price, :id)
   end
 end
