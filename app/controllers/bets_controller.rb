@@ -6,7 +6,7 @@ class BetsController < ApplicationController
   def create
     @bet = Bet.create(amount: bet_params[:amount],
                       bet_type: bet_params[:bet_type],
-                      user_id: User.find_by(username: bet_params[:username]),
+                      user_id: User.find_by(username: bet_params[:username]).id,
                       start_price: bet_params[:start_price])
     render json: @bet, status: 201
   end

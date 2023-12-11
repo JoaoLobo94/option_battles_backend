@@ -50,6 +50,5 @@ class Bet < ApplicationRecord
 
     ws.close
   end
-
 end
 

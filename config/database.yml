@@ -19,14 +19,14 @@ default: &default
 
 development:
   <<: *default
-  database: option_battles_backend_development
+  database: bitbit_backend_development
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: option_battles_backend_test
+  database: bitbit_backend_test
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -50,6 +50,6 @@ test:
 #
 production:
   <<: *default
-  database: option_battles_backend_production
-  username: option_battles_backend
-  password: <%= ENV["OPTION_BATTLES_BACKEND_DATABASE_PASSWORD"] %>
+  database: bitbit_backend_production
+  username: bitbit_backend
+  password: <%= ENV["bitbit_BACKEND_DATABASE_PASSWORD"] %>
