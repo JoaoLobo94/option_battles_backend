@@ -2,7 +2,7 @@ class LiquidServer
   include HTTParty
   base_uri 'http://127.0.0.1:5000'
   def initialize
-    @private_key = ENV['LIQUID_PRIVATE_KEY']
+    @private_key = ENV['LIQUID_PRIVATE_KEY_MAINNET']
     @liquid_token = ENV['LIQUID_PYTHON_TOKEN']
   end
 
