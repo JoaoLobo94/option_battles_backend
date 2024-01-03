@@ -16,6 +16,7 @@ class BetsController < ApplicationController
 
     render json: @bet, status: 200
   end
+  # implement update for chess to check backend for winner
 
   private
   def bet_params

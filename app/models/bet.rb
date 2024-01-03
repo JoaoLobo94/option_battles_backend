@@ -14,6 +14,7 @@
 class Bet < ApplicationRecord
   belongs_to :user
 
+  # refactor this into different app (node or go)
   def check_for_option_game_winner
     ws_url = 'wss://stream.binance.com:9443/ws/btcusdt@trade'
 
